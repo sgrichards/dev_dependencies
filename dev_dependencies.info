@@ -1,0 +1,13 @@
+name = Development Dependencies
+description = Enable/Disable development module dependencies
+package = Development
+core = 7.x
+
+dependencies[] = devel
+dependencies[] = field_ui
+dependencies[] = views_ui
+dependencies[] = context_ui
+dependencies[] = rules_admin
+dependencies[] = ds_ui
+dependencies[] = migrate_ui
+

@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * implements hook_disable().
+ */
+function dev_dependencies_disable() {
+
+  // retrieve the dependency list from the .info file
+  $path = drupal_get_path('module', 'dev_dependencies');
+  $info = drupal_parse_info_file($path . '/dev_dependencies.info');
+  $disable = array();
+
+  // build a list of modules to disable
+  if (isset($info['dependencies'])) {
+    foreach ($info['dependencies'] as $key => $module_name) {
+      $disable[$module_name] = $module_name;
+    }
+  }
+
+  // explicitly disable dev dependant modules
+  if ($disable) {
+    module_disable($disable, FALSE);
+  }
+
+  watchdog('dev_dependencies', 'Disabled dev_dependencies modules: %list', array('%list' => join(',', $disable)), WATCHDOG_INFO);
+}
+
+/**
+ * Implements hook_enable().
+ */
+function dev_dependencies_enable() {
+  // react on module enable
+}
